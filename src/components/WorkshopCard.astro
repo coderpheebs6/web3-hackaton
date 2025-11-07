@@ -3,13 +3,15 @@ import { getCollection } from 'astro:content';
 import ArrowLink from './ArrowLink.astro';
 const allWorkshops = await getCollection('workshops');
 const { theme = 'grey', workshop } = Astro.props;
+console.log(workshop);
+
 ---
 
 <article class={`workshop-card workshop-card--${theme}`}>
   <div>
     <h3><span>{workshop.data.title}</span></h3>
     <ArrowLink class="link" href={`/workshops/${workshop.id}`} title="Learn more" />
-    <img class="image" src={workshop.data.image} alt="" />
+    <img class="image" src={workshop.data.image.src} alt="" />
   </div>
 </article>
 
