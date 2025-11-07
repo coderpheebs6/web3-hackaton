@@ -1,6 +1,9 @@
 ---
+
 import Base from "../layouts/Base.astro";
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+const allNews = await getCollection('news');
+
 ---
 
 <Base title="News">
@@ -8,17 +11,22 @@ import { getCollection } from 'astro:content';
     <h2><span>News</span></h2>
     <p class="code">The third digit of the code is 3</p>
     <ul>
-      <li>
-        <article>
-          <h3>##TITLE##</h3>
-          <time datetime={##DATE##}>
-            {##DATE##}
-          </time>
-          <div class="md">
-            ##CONTENT##
-          </div>
-        </article>
-      </li>
+      {
+        allNews.map(async (newsItem) => {
+          const { Content } = await render(newsItem);
+          return (
+            <li>
+              <article>
+                <h3>{newsItem.data.title}</h3>
+                <time>{newsItem.data.date.toDateString()}</time>
+                <div class="md">
+                  <Content />
+                </div>
+              </article>
+            </li>
+          );
+        })
+      }
     </ul>
   </div>
 </Base>
