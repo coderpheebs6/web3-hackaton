@@ -15,7 +15,7 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Markdown frontmatter={post.data}>
+<Markdown>
   <div slot="top">
     <a href="/#workshops">Workshops</a>
     <h1><span>{post.data.title}</span></h1>
