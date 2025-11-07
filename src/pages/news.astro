@@ -1,8 +1,9 @@
 ---
+
+import Base from "../layouts/Base.astro";
 import { getCollection, render } from 'astro:content';
 const allNews = await getCollection('news');
 
-import Base from '../layouts/Base.astro';
 ---
 
 <Base title="News">
