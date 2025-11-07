@@ -1,19 +1,19 @@
 ---
 /* check WorkshopCard.astro to get an idea of how to use these themes */
-const themes = ["grey", "green", "black"];
+import { getCollection } from 'astro:content';
+const allWorkshops = await getCollection('workshops');
+import WorkshopCard from './WorkshopCard.astro';
+import Markdown from '../layouts/Markdown.astro';
+const themes = ['grey', 'green', 'black'];
 ---
 
 <section class="container" id="workshops">
   <header>
     <h2><span>Workshops</span></h2>
-    <p>
-      These workshops offer hands-on introductions to creative technologies,
-      empowering artists, designers, and musicians to explore digital tools as
-      expressive, interactive mediums.
-    </p>
+    <p>These workshops offer hands-on introductions to creative technologies, empowering artists, designers, and musicians to explore digital tools as expressive, interactive mediums.</p>
   </header>
   <ul>
-    <li>##WORKSHOP##</li>
+    {allWorkshops.map((workshop) => <WorkshopCard workshop={workshop} />)}
   </ul>
 </section>
 
