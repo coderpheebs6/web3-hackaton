@@ -1,6 +1,6 @@
 ---
+import { getCollection, render} from "astro:content";
 import Markdown from "../../layouts/Markdown.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const allFoundations = await getCollection('foundations');
@@ -10,17 +10,14 @@ export async function getStaticPaths() {
   }));
 }
 
-type Props = {
-  foundation: CollectionEntry<'foundations'>;
-}
-
 const { foundation } = Astro.props;
+const { Content } = await render(foundation);
 ---
 
 <Markdown>
   <a href="/#foundations">Foundations</a>
   <h2><span>{foundation.data.title}</span></h2>
-  <article set:html={foundation.body} />
+  <Content />
 </Markdown>
 
 <style>
