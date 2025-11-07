@@ -1,20 +1,17 @@
 ---
-import ArrowLink from "./ArrowLink.astro";
+import { getCollection } from 'astro:content';
+import ArrowLink from './ArrowLink.astro';
+const allWorkshops = await getCollection('workshops');
+const { theme = 'grey', workshop } = Astro.props;
+console.log(workshop);
 
-const { theme = "grey" } = Astro.props;
 ---
 
 <article class={`workshop-card workshop-card--${theme}`}>
   <div>
-   <h3><span>{##TITLE##}</span></h3>
-    <ArrowLink
-      class="link"
-      href={`/workshops/${##ID##}`}
-      title="Learn more"
-    />
-    <img
-     class="image" src={##IMAGE##} alt=""
-    />
+    <h3><span>{workshop.data.title}</span></h3>
+    <ArrowLink class="link" href={`/workshops/${workshop.id}`} title="Learn more" />
+    <img class="image" src={workshop.data.image.src} alt="" />
   </div>
 </article>
 
@@ -36,9 +33,9 @@ const { theme = "grey" } = Astro.props;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
-      "title"
-      "img"
-      "link";
+      'title'
+      'img'
+      'link';
     gap: var(--sp-xs);
   }
 
@@ -65,8 +62,8 @@ const { theme = "grey" } = Astro.props;
   @media (min-width: 30rem) {
     div {
       grid-template-areas:
-        "title img"
-        "link img";
+        'title img'
+        'link img';
     }
   }
 
