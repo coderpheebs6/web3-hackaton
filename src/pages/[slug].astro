@@ -3,28 +3,32 @@ import { getCollection, render } from "astro:content";
 import Markdown from "../layouts/Markdown.astro";
 
 export async function getStaticPaths() {
-    const allTeams = await getCollection("team");
+  const allTeams = await getCollection("team");
 
-    return allTeams.map((member) => ({
-        params: { slug: member.id },
-        props: { member },
-    }));
+  return allTeams.map((member) => ({
+    params: { slug: member.id },
+    props: { member },
+  }));
 }
 
 const { member } = Astro.props;
 const { Content } = await render(member);
-
-
 ---
 
 <Markdown>
   <div slot="top">
-    <a href="/#team">Team</a>
+    <a href="/web3-hackaton/#team">Team</a>
     <h2><span>{member.data.name}</span></h2>
   </div>
   <Content />
   <div slot="sidebar" class="profile">
-    <img width="300" height="300" src={member.data.pic.src} alt="" class="image" />
+    <img
+      width="300"
+      height="300"
+      src={member.data.pic.src}
+      alt=""
+      class="image"
+    />
   </div>
 </Markdown>
 

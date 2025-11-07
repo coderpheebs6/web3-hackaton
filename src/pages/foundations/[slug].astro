@@ -1,9 +1,9 @@
 ---
-import { getCollection, render} from "astro:content";
+import { getCollection, render } from "astro:content";
 import Markdown from "../../layouts/Markdown.astro";
 
 export async function getStaticPaths() {
-  const allFoundations = await getCollection('foundations');
+  const allFoundations = await getCollection("foundations");
   return allFoundations.map((foundation) => ({
     params: { slug: foundation.id },
     props: { foundation },
@@ -15,7 +15,7 @@ const { Content } = await render(foundation);
 ---
 
 <Markdown>
-  <a href="/#foundations">Foundations</a>
+  <a href="/web3-hackaton/#foundations">Foundations</a>
   <h2><span>{foundation.data.title}</span></h2>
   <Content />
 </Markdown>
