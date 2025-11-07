@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import ArrowLink from './ArrowLink.astro';
 const allWorkshops = await getCollection('workshops');
 const { theme = 'grey', workshop } = Astro.props;
-console.log(workshop);
+
 ---
 
 <article class={`workshop-card workshop-card--${theme}`}>
